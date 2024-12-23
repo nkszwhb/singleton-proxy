@@ -1,0 +1,14 @@
+src/
+test/
+coverage/
+.github/
+.vscode/
+.git/
+.gitignore
+.eslintrc.js
+.prettierrc
+tsconfig.json
+jest.config.js
+*.test.ts
+.editorconfig
+CHANGELOG.md

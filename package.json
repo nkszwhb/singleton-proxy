@@ -40,12 +40,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/singleton-proxy.git"
+    "url": "git+https://github.com/nkszwhb/singleton-proxy.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/singleton-proxy/issues"
+    "url": "https://github.com/nkszwhb/singleton-proxy/issues"
   },
-  "homepage": "https://github.com/yourusername/singleton-proxy#readme",
+  "homepage": "https://github.com/nkszwhb/singleton-proxy#readme",
   "publishConfig": {
     "access": "public"
   }

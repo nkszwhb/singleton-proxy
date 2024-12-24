@@ -8,16 +8,50 @@
 - 🚀 使用 Proxy 实现，零侵入性
 - 📦 零依赖
 - 💪 完整的 TypeScript 类型支持
+- 🔄 支持 CommonJS 和 ESM 模块系统
 
 ## 安装
 
 ```bash
+# 使用 npm
 npm install singleton-proxy
+
+# 使用 yarn
+yarn add singleton-proxy
+
+# 使用 pnpm
+pnpm add singleton-proxy
 ```
 
 ## 使用方法
 
-### 类的单例模式
+### CommonJS
+
+```javascript
+const { singleton } = require('singleton-proxy');
+
+class UserService {
+  constructor(config) {
+    this.config = config;
+  }
+
+  getConfig() {
+    return this.config;
+  }
+}
+
+// 转换为单例类
+const SingletonUserService = singleton(UserService);
+
+// 使用
+const service1 = new SingletonUserService('config1');
+const service2 = new SingletonUserService('config2');
+
+console.log(service1 === service2); // true
+console.log(service1.getConfig()); // 'config1'
+```
+
+### ESM
 
 ```typescript
 import { singleton } from 'singleton-proxy';
@@ -40,31 +74,32 @@ const SingletonUserService = singleton(UserService);
 // 使用
 const service1 = new SingletonUserService('config1');
 const service2 = new SingletonUserService('config2');
+
 console.log(service1 === service2); // true
 console.log(service1.getConfig()); // 'config1'
 ```
 
-### 函数的单例模式
+### 函数单例模式
 
 ```typescript
 import { singleton } from 'singleton-proxy';
 
-function testFunction(value: number) {
+function createConnection(url: string) {
   return {
-    value,
+    url,
     timestamp: Date.now()
   };
 }
 
 // 转换为单例函数
-const singletonFunction = singleton(testFunction);
+const singletonConnection = singleton(createConnection);
 
 // 使用
-const result1 = singletonFunction(1);
-const result2 = singletonFunction(2);
+const conn1 = singletonConnection('url1');
+const conn2 = singletonConnection('url2');
 
-console.log(result1 === result2); // true
-console.log(result1.value); // 1
+console.log(conn1 === conn2); // true
+console.log(conn1.url); // 'url1'
 ```
 
 ## API
@@ -91,19 +126,29 @@ console.log(result1.value); // 1
 
 ## 兼容性
 
-- 支持 ES2018 及以上版本
+- 支持 ES2015 (ES6) 及以上版本
 - 需要环境支持 Proxy API
-- 支持所有现代浏览器和 Node.js
+- Node.js >= 6.0.0
+- 浏览器支持：
+  - Chrome >= 49
+  - Firefox >= 18
+  - Safari >= 10
+  - Edge >= 12
+- 同时支持 CommonJS 和 ESM 模块系统
 
 ## 开发
 
 ```bash
+# 安装依赖
 npm install
-npm run test
+
+# 运行测试
+npm test
+
+# 构建
+npm run build
 ```
 
-## 许可证
+## License
 
-MIT License
-
-Copyright (c) 2024
+MIT © 2024
